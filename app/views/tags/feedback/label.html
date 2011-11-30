@@ -1,0 +1,47 @@
+<div id="feedback-modal" class="modal fade" style="display:none">
+    <div class="modal-header">
+        <a href="#" class="close">x</a>
+        <h3>Send us your feedback</h3>
+    </div>
+
+    <form action="@{Feedback.submit}" method="post">
+        <input type="hidden" name="url" value="${request.url}" />
+        <div class="modal-body">
+            <p>Your feedback is much appreciated. Enter anything you want to tell us in the box below and
+                we&rsquo;ll take a look at it ASAP.</p>
+        
+            <div class="clearfix">
+                <textarea name="message" style="width:520px;height:100px"></textarea>
+            </div>
+            
+            <p class="alert-message success" style="display:none">Thanks, we&rsquo;ve received your feedback!</p>
+            <p class="alert-message error" style="display:none">Sorry, we didn&rsquo;t get your feedback for some reason. Please try again.</p>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn primary">Complete purchase</button>
+            <button class="btn close">Cancel</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function() {
+        $('<div id="feedback-kickoff"><a href="javascript:void(0)" data-controls-modal="feedback-modal" data-backdrop="static">Feedback</a></div>"')
+            .appendTo($('body'));
+        
+        var popup = $('#feedback-modal');
+        $('form', popup).ajaxForm({
+            success: function() {
+                $('p.success', popup).show();
+                
+                setTimeout(function() { popup.modal('hide') }, 2000);
+            },
+            error: function() {
+                $('p.error').show();
+            }
+        });
+        popup.bind('show', function() {
+            $('p.success, p.error').hide();
+        })
+    });
+</script>

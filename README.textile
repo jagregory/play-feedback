@@ -1,0 +1,34 @@
+h1. play-feedback
+
+Create a simple AJAX feedback control for your site. Depends on bootstrap-modal.js and jQuery.
+
+h2. Configuring the module
+
+Add the following to your @dependencies.yml@ to enable it:
+
+<pre><code>require:
+    - play
+    - play -> feedback 0.1</code></pre>
+
+Add the routes into your @routes@ file to enable the Google Checkout callback:
+
+<pre><code>*    /    module:feedback</code></pre>
+
+Optionally, configure your authenticated user session key (this defaults to @username@):
+
+<pre><code># Feedback
+feedback.authenticatedUserSessionKey=**your_key**</code></pre>
+
+h2. Usage
+
+Insert @#{feedback.link /}@ somewhere near the bottom of a page (or for site-wide usage, in your top-level template). This will append some Javascript to the page and on-ready, create a feedback link; when that link is clicked a bootstrap-modal dialog will be shown to submit feedback.
+
+A @Feedback@ entity is used, which stores its data in a table of the same name. No admin page is provided, but it shouldn't be hard to knock one up.
+
+h2. Bugs etc...
+
+The feedback module is provided as-is with no warranty or even expectation that it will work for you. It's been extracted from an in-house solution and only tested on our one system. Feel free to raise issues on our "Github repository":http://github.com/jagregory/play-feedback.
+
+h2. History
+
+* v0.1: Initial version, nothing too fancy
